@@ -12,3 +12,54 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+body {
+    background-color: #333;
+    color: #F0F0F0;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.main-container {
+    margin-top: 70px;
+    margin-bottom: 80px;
+}
+
+.quotation-section {
+
+}
+
+.x-row {
+    border-right: 3px solid #191919;
+    border-bottom: 3px solid #191919;
+    margin: 0px !important;
+    padding: 0px !important;
+    
+    border-radius: 8px;
+}
+
+.value-row {
+    padding: 15px;
+}
+
+.quotation-block {
+    width: 200px;
+    margin: 15px auto;
+    
+    border-radius: 8px 8px 20px 8px;
+    border-top: 3px solid #191919;
+    border-left: 3px solid #191919;
+    
+    box-shadow: -3px -3px 1px rgba(255,255,255,0.4);
+}
+
+.fz-28 {
+    font-size: 28px;
+}
+
+.color-green {
+    color: #0F0;
+}
+
+.first-row {
+    margin-bottom: 40px;
+}
