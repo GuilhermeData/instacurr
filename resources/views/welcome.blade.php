@@ -8,11 +8,14 @@
         <title>Insta Currency</title>
         
         <!-- Bootstrap Bill Turner -->
-        <link rel="stylesheet" type="text/css" href="/assets/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
-        <script type="text/javascript" src="/assets/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{asset('/assets/bootstrap-4.0.0/dist/css/bootstrap.min.css')}}" />
+        <script type="text/javascript" src="{{asset('/assets/bootstrap-4.0.0/dist/js/bootstrap.min.js')}}"></script>
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ asset('favicon.ico')}}" type="image/x-icon">
         
         <!-- APP Css -->
-        <link rel="stylesheet" type="text/css" href="/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}" />
         
         <!-- External helpful things -->
         <link href="https://fonts.googleapis.com/css?family=Courgette|Montserrat" rel="stylesheet">
@@ -29,5 +32,5 @@
         </footer>
     </body>
         
-    <script src="/js/app.js"></script>
+    <script src="{{asset('js/app.js')}}"></script>
 </html>

@@ -7,10 +7,6 @@ export default class Quotation extends Component {
         
         super(props);
         
-        this.state = {
-            closed: false
-        };
-        
         this.currencyName = this.props.currency.split(" ")[0];
         this.currencyFlag = "./img/" + this.currencyName + "-flag.png";
         
@@ -23,26 +19,21 @@ export default class Quotation extends Component {
     }
          
     render() {
-        
-        if(this.state.closed) {
-            return null;
-        } else {
-            return (
-                <div className="col-md quotation-section" id={this.currencyName}>
-                    <div className="quotation-block">
-                        <div className="row x-row">
-                            <button className="btn btn-danger btn-x" onClick={this.close}>X</button>
-                        </div>
-                        <div className="row value-row">
-                            <div className="col color-black">
-                                R$ <span className="color-green fz-28">{this.props.value}</span> <br />
-                                <img src={this.currencyFlag} width="23" />&nbsp;&nbsp;{this.props.currency}
-                            </div>
+        return (
+            <div className="col-md quotation-section" id={this.currencyName}>
+                <div className="quotation-block">
+                    <div className="row x-row">
+                        <button className="btn btn-danger btn-x" onClick={this.close}>X</button>
+                    </div>
+                    <div className="row value-row">
+                        <div className="col color-black">
+                            R$ <span className="color-green fz-28">{this.props.value}</span> <br />
+                            <img src={this.currencyFlag} width="23" />&nbsp;&nbsp;{this.props.currency}
                         </div>
                     </div>
                 </div>
-            );
-        }
+            </div>
+        );
     }
 }
 

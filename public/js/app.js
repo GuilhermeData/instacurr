@@ -36259,7 +36259,7 @@ var App = function (_Component) {
         value: function fetchFromDatabase() {
             var _this2 = this;
 
-            fetch("/quotations").then(function (res) {
+            fetch("./quotations").then(function (res) {
                 return res.json();
             }).then(function (result) {
                 _this2.updateState(result);
@@ -59131,10 +59131,6 @@ var Quotation = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Quotation.__proto__ || Object.getPrototypeOf(Quotation)).call(this, props));
 
-        _this.state = {
-            closed: false
-        };
-
         _this.currencyName = _this.props.currency.split(" ")[0];
         _this.currencyFlag = "./img/" + _this.currencyName + "-flag.png";
 
@@ -59150,47 +59146,42 @@ var Quotation = function (_Component) {
     _createClass(Quotation, [{
         key: 'render',
         value: function render() {
-
-            if (this.state.closed) {
-                return null;
-            } else {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'col-md quotation-section', id: this.currencyName },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-md quotation-section', id: this.currencyName },
+                    { className: 'quotation-block' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'quotation-block' },
+                        { className: 'row x-row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { className: 'btn btn-danger btn-x', onClick: this.close },
+                            'X'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row value-row' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
-                            { className: 'row x-row' },
+                            { className: 'col color-black' },
+                            'R$ ',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'button',
-                                { className: 'btn btn-danger btn-x', onClick: this.close },
-                                'X'
-                            )
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'row value-row' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'col color-black' },
-                                'R$ ',
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'span',
-                                    { className: 'color-green fz-28' },
-                                    this.props.value
-                                ),
-                                ' ',
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.currencyFlag, width: '23' }),
-                                '\xA0\xA0',
-                                this.props.currency
-                            )
+                                'span',
+                                { className: 'color-green fz-28' },
+                                this.props.value
+                            ),
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.currencyFlag, width: '23' }),
+                            '\xA0\xA0',
+                            this.props.currency
                         )
                     )
-                );
-            }
+                )
+            );
         }
     }]);
 

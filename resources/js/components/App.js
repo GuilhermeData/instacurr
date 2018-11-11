@@ -30,7 +30,7 @@ export default class App extends Component {
     }
     
     fetchFromDatabase() {
-        fetch("/quotations")
+        fetch("./quotations")
             .then(res => res.json())
             .then(
                 (result) => {
