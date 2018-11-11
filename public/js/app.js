@@ -36225,6 +36225,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+// Custom imports
 
 
 var App = function (_Component) {
@@ -36240,7 +36241,7 @@ var App = function (_Component) {
             eur: 0,
             gbp: 0,
             ars: 0,
-            updated_at: ''
+            updated_at: false
         };
 
         var minutes = 5;
@@ -36279,28 +36280,136 @@ var App = function (_Component) {
             });
         }
     }, {
+        key: 'correctDate',
+        value: function correctDate(date) {
+
+            var dd = function dd(d) {
+                return d < 10 ? '0' + d : d;
+            };
+
+            var stringDate = '';
+
+            if (date) {
+                var myDate = new Date(date);
+                stringDate = dd(myDate.getDate()) + "/" + dd(myDate.getMonth() + 1) + "/" + myDate.getFullYear() + " às " + dd(myDate.getHours()) + ":" + dd(myDate.getMinutes());
+            }
+
+            return stringDate;
+        }
+    }, {
+        key: 'needToAsk',
+        value: function needToAsk() {
+            if ($('#USD').is(':visible') && $('#EUR').is(':visible') && $('#GBP').is(':visible') && $('#ARS').is(':visible')) {
+                return false;
+            } else return true;
+        }
+    }, {
+        key: 'showCurrencyAgain',
+        value: function showCurrencyAgain(currName) {
+
+            $('#' + currName).show(300);
+            $('#icon' + currName).hide(300);
+
+            if (!this.needToAsk()) {
+                $('#askToShow').hide();
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'container main-container' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'row first-row' },
+                    { className: 'row first-row  justify-content-center' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'col-md-8 offset-md-1' },
+                        { className: 'col-md-6' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h1',
                             null,
-                            'Insta Currency \xE9 o APP que mostra em tempo real, o valor em R$ das principais moedas do mercado mundial!'
+                            'Insta Currency \xE9 o APP que mostra o valor atual em R$ (reais) das principais moedas do mercado mundial.'
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'col-md', id: 'relogio' },
-                        'Atualizado em: ',
-                        this.state.updated_at
+                        { className: 'col-md-3' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            null,
+                            'Uma nova consulta por atualiza\xE7\xF5es nos valores \xE9 feita automaticamente \xE0 cada 5 minutos pelo nosso sistema, portanto, relaxe. Se algo mudar, voc\xEA saber\xE1! ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-smile' })
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row  justify-content-center' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-auto' },
+                        '\xA0'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-auto bold', id: 'askToShow' },
+                        'Mostrar:\xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'currencyIcon btn btn-success', id: 'iconUSD', onClick: function onClick() {
+                                    _this3.showCurrencyAgain('USD');
+                                } },
+                            'USD'
+                        ),
+                        '\xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'currencyIcon btn btn-success', id: 'iconEUR', onClick: function onClick() {
+                                    _this3.showCurrencyAgain('EUR');
+                                } },
+                            'EUR'
+                        ),
+                        '\xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'currencyIcon btn btn-success', id: 'iconGBP', onClick: function onClick() {
+                                    _this3.showCurrencyAgain('GBP');
+                                } },
+                            'GBP'
+                        ),
+                        '\xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'currencyIcon btn btn-success', id: 'iconARS', onClick: function onClick() {
+                                    _this3.showCurrencyAgain('ARS');
+                                } },
+                            'ARS'
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row second-row justify-content-center' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col col-md-auto', id: 'relogio' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'bold fz-28' },
+                            'ATUALIZADO EM: '
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col col-md-auto', id: 'relogio' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { className: 'fz-28' },
+                            this.correctDate(this.state.updated_at)
+                        )
                     )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59017,50 +59126,71 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Quotation = function (_Component) {
     _inherits(Quotation, _Component);
 
-    function Quotation() {
+    function Quotation(props) {
         _classCallCheck(this, Quotation);
 
-        return _possibleConstructorReturn(this, (Quotation.__proto__ || Object.getPrototypeOf(Quotation)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Quotation.__proto__ || Object.getPrototypeOf(Quotation)).call(this, props));
+
+        _this.state = {
+            closed: false
+        };
+
+        _this.currencyName = _this.props.currency.split(" ")[0];
+        _this.currencyFlag = "./img/" + _this.currencyName + "-flag.png";
+
+        _this.close = function () {
+            $('#' + _this.currencyName).hide(300);
+            $('#icon' + _this.currencyName).show(300);
+            $('#askToShow').show();
+        };
+
+        return _this;
     }
 
     _createClass(Quotation, [{
         key: 'render',
         value: function render() {
 
-            var currencyFlag = "./img/" + this.props.currency.split(" ")[0] + "-flag.png";
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'col-md quotation-section ' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            if (this.state.closed) {
+                return null;
+            } else {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'quotation-block' },
+                    { className: 'col-md quotation-section', id: this.currencyName },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'row x-row' },
-                        '\xA0\xA0X'
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'row value-row' },
+                        { className: 'quotation-block' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
-                            { className: 'col' },
-                            'R$ ',
+                            { className: 'row x-row' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'span',
-                                { className: 'color-green fz-28' },
-                                this.props.value
-                            ),
-                            ' ',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: currencyFlag, width: '23' }),
-                            '\xA0\xA0',
-                            this.props.currency
+                                'button',
+                                { className: 'btn btn-danger btn-x', onClick: this.close },
+                                'X'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'row value-row' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'col color-black' },
+                                'R$ ',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'span',
+                                    { className: 'color-green fz-28' },
+                                    this.props.value
+                                ),
+                                ' ',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.currencyFlag, width: '23' }),
+                                '\xA0\xA0',
+                                this.props.currency
+                            )
                         )
                     )
-                )
-            );
+                );
+            }
         }
     }]);
 

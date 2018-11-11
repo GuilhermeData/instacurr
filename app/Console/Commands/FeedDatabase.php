@@ -38,6 +38,8 @@ class FeedDatabase extends Command
      */
     public function handle()
     {
+        echo "\n\nA partir de agora a cada 5 min a base de dados será alimentada com a última cotação em reais para as seguintes moedas estrangeiras (Dólar, Euro, Libra, Peso)"
+        . "\n\nPara parar o processo pressione Ctrl + C ou feche essa janela";
         $this->loop();
     }
     
@@ -47,16 +49,25 @@ class FeedDatabase extends Command
         $minutes = 5;
         
         $json_data = file_get_contents($api_url);
-        $data = json_decode($json_data);
-        $curr = $data->results->currencies;
         
-        $quotation = new Quotations;
-        $quotation->curr_source = $curr->source;
-        $quotation->usd =         $curr->USD->buy;
-        $quotation->eur =         $curr->EUR->buy;
-        $quotation->gbp =         $curr->GBP->buy;
-        $quotation->ars =         $curr->ARS->buy;
-        $quotation->save();
+        if($json_data) {
+        
+            $data = json_decode($json_data);
+            $curr = $data->results->currencies;
+
+            $quotation = new Quotations;
+            $quotation->curr_source = $curr->source;
+            $quotation->usd =         $curr->USD->buy;
+            $quotation->eur =         $curr->EUR->buy;
+            $quotation->gbp =         $curr->GBP->buy;
+            $quotation->ars =         $curr->ARS->buy;
+            $quotation->created_at =  date('Y-m-d H:i:s');
+            $quotation->updated_at =  date('Y-m-d H:i:s');
+            $quotation->save();
+            
+        } else {
+            echo "\n\nNenhuma informação encontrada para a iteração das ".date('d/m/Y H:i:s');
+        }
         
         sleep($minutes * 60);
         $this->loop();
