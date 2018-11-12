@@ -86,7 +86,7 @@ class FeedDatabase extends Command
     {
         $api_url = "https://api.hgbrasil.com/finance/quotations?format=json&key=ef044b18";
         $noDataMsg = "\n\nNenhuma informação encontrada para a iteração em ".date('d/m/Y H:i:s');
-        $minutes = 5;
+        $minutes = 4;
         
         $json_data = file_get_contents($api_url);
         

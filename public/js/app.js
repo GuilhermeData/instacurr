@@ -36260,11 +36260,13 @@ var App = function (_Component) {
             var _this2 = this;
 
             fetch("./quotations").then(function (res) {
-                return res.json();
+                if (res.status === 200) return res.json();else return false;
             }).then(function (result) {
-                _this2.updateState(result);
+                if (result) _this2.updateState(result);else {
+                    console.log('Nenhuma informação encontrada.');
+                }
             }, function (error) {
-                throw new Error(error);
+                console.log('Nenhuma informação encontrada, por favor inicie o comando "php artisan start-feed" com o seu terminal na pasta raiz do projeto.');
             });
         }
     }, {
@@ -59171,7 +59173,7 @@ var Quotation = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'span',
                                 { className: 'color-green fz-28' },
-                                this.props.value
+                                parseFloat(this.props.value).toFixed(4)
                             ),
                             ' ',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),

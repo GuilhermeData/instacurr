@@ -31,13 +31,21 @@ export default class App extends Component {
     
     fetchFromDatabase() {
         fetch("./quotations")
-            .then(res => res.json())
+            .then((res) => {
+                if(res.status === 200)
+                    return res.json();
+                else return false;
+            })
             .then(
                 (result) => {
-                  this.updateState(result);
+                    if(result)
+                        this.updateState(result);
+                    else {
+                        console.log('Nenhuma informação encontrada.');
+                    }
                 },
                 (error) => {
-                  throw new Error(error);
+                    console.log('Nenhuma informação encontrada, por favor inicie o comando "php artisan start-feed" com o seu terminal na pasta raiz do projeto.');
                 }
             );
     }

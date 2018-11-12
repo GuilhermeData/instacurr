@@ -27,7 +27,7 @@ export default class Quotation extends Component {
                     </div>
                     <div className="row value-row">
                         <div className="col color-black">
-                            R$ <span className="color-green fz-28">{this.props.value}</span> <br />
+                            R$ <span className="color-green fz-28">{parseFloat(this.props.value).toFixed(4)}</span> <br />
                             <img src={this.currencyFlag} width="23" />&nbsp;&nbsp;{this.props.currency}
                         </div>
                     </div>
